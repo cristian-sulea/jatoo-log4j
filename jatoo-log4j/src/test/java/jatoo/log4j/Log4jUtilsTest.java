@@ -95,9 +95,9 @@ public class Log4jUtilsTest {
   }
 
   @Test
-  public void test() {
+  public void testOneLogger() {
 
-    Log4jUtils.init();
+    Log4jUtils.init(WORKING_DIRECTORY);
 
     Log logger = LogFactory.getLog(Log4jUtilsTest.class);
 
@@ -106,8 +106,34 @@ public class Log4jUtilsTest {
     logger.warn("warn");
     logger.error("error");
     logger.fatal("fatal");
+  }
 
-    System.out.println("xxx");
+  @Test
+  public void testManyLoggers() {
+
+    Log4jUtils.init(WORKING_DIRECTORY);
+
+    //
+    // logger 1
+
+    Log logger1 = LogFactory.getLog("logger1");
+
+    logger1.debug("debug");
+    logger1.info("info");
+    logger1.warn("warn");
+    logger1.error("error");
+    logger1.fatal("fatal");
+
+    //
+    // logger 2
+
+    Log logger2 = LogFactory.getLog("logger2");
+
+    logger2.debug("debug");
+    logger2.info("info");
+    logger2.warn("warn");
+    logger2.error("error");
+    logger2.fatal("fatal");
   }
 
 }
