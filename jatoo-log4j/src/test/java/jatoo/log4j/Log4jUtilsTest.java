@@ -20,6 +20,8 @@ package jatoo.log4j;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -67,7 +69,7 @@ public class Log4jUtilsTest {
   }
 
   @Test
-  public void test1() {
+  public void testInit() {
 
     Log4jUtils.init();
 
@@ -75,7 +77,7 @@ public class Log4jUtilsTest {
   }
 
   @Test
-  public void test2() {
+  public void testInitWithWorkingDirectory() {
 
     Log4jUtils.init(WORKING_DIRECTORY);
 
@@ -84,12 +86,28 @@ public class Log4jUtilsTest {
   }
 
   @Test
-  public void test3() {
+  public void testInitWithWorkingDirectoryAndAppDirectory() {
 
     Log4jUtils.init(WORKING_DIRECTORY, APP_DIRECTORY);
 
     Assert.assertEquals(new File(WORKING_DIRECTORY, "logs").getAbsolutePath(), System.getProperty("logs.directory"));
     Assert.assertTrue(new File(WORKING_DIRECTORY, "logs").exists());
+  }
+
+  @Test
+  public void test() {
+
+    Log4jUtils.init();
+
+    Log logger = LogFactory.getLog(Log4jUtilsTest.class);
+
+    logger.debug("debug");
+    logger.info("info");
+    logger.warn("warn");
+    logger.error("error");
+    logger.fatal("fatal");
+
+    System.out.println("xxx");
   }
 
 }
