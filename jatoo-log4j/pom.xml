@@ -43,6 +43,21 @@
 	</developers>
 
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<configuration>
+					<options>
+						<option>-keep public class * { public protected *; }</option>
+					</options>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 	<dependencies>
 
 		<dependency>
@@ -60,21 +75,6 @@
 		</dependency>
 
 	</dependencies>
-
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.wvengen</groupId>
-				<artifactId>proguard-maven-plugin</artifactId>
-				<configuration>
-					<options>
-						<option>-keep public class * { public protected *; }</option>
-					</options>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 
 </project>
