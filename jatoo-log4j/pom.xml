@@ -50,9 +50,13 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 
+
+		<!-- test -->
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

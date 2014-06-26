@@ -21,9 +21,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -32,7 +30,7 @@ import org.apache.log4j.PropertyConfigurator;
  * library.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 4.1, June 24, 2014
+ * @version 4.3, June 26, 2014
  */
 public class Log4jUtils {
 
@@ -67,7 +65,7 @@ public class Log4jUtils {
           // configure from jar
 
           try {
-            PropertyConfigurator.configure(Log4jUtils.class.getClassLoader().getResourceAsStream("config/log4j/log4j.properties"));
+            PropertyConfigurator.configure(Log4jUtils.class.getClassLoader().getResourceAsStream("META-INF/log4j/log4j.properties"));
           } catch (Exception e) {
             e.printStackTrace(System.err);
           }
@@ -84,23 +82,10 @@ public class Log4jUtils {
 
           try {
 
-            Enumeration<URL> loggersEnumeration = Log4jUtils.class.getClassLoader().getResources("config/log4j/loggers.list");
+            Enumeration<URL> loggersEnumeration = Log4jUtils.class.getClassLoader().getResources("META-INF/log4j/loggers.properties");
 
             while (loggersEnumeration.hasMoreElements()) {
-              URL loggersURL = (URL) loggersEnumeration.nextElement();
-
-              try {
-
-                List<String> loggers = IOUtils.readLines(loggersURL.openStream());
-
-                for (String logger : loggers) {
-                  PropertyConfigurator.configure(Log4jUtils.class.getClassLoader().getResourceAsStream("config/log4j/loggers/" + logger));
-                }
-              }
-
-              catch (Exception e) {
-                e.printStackTrace(System.err);
-              }
+              PropertyConfigurator.configure(loggersEnumeration.nextElement());
             }
           }
 
