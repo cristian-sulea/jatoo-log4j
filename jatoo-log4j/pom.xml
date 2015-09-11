@@ -4,29 +4,21 @@
 
 	<parent>
 		<groupId>net.sulea.cristian</groupId>
-		<artifactId>projects</artifactId>
-		<relativePath>../../../../projects/Git Repositories/projects/projects/pom.xml</relativePath>
+		<artifactId>jatoo</artifactId>
+		<relativePath>../../jatoo/jatoo/pom.xml</relativePath>
 		<version>1</version>
 	</parent>
 
 
 	<artifactId>jatoo-log4j</artifactId>
-	<version>4.0</version>
+	<version>4.1-SNAPSHOT</version>
 
 
 	<name>JaToo Log4j</name>
-	<description>JaToo Log4j - a Java Open Source library created to ease the work with Apache Log4j™ logging library.</description>
+	<description>A Java Open Source library created to ease the work with Apache Log4j™ logging library.</description>
 	<url>http://cristian.sulea.net/projects/jatoo-log4j/</url>
 
 	<inceptionYear>2013</inceptionYear>
-
-
-	<distributionManagement>
-		<site>
-			<id>${distribution.site.id}</id>
-			<url>${distribution.site.url}/${project.artifactId}</url>
-		</site>
-	</distributionManagement>
 
 
 	<developers>
