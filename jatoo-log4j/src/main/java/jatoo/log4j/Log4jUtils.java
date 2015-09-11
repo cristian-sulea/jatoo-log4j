@@ -51,11 +51,11 @@ public final class Log4jUtils {
     init(new File(System.getProperty("user.dir")));
   }
 
-  public static void init(File workingDirectory) {
+  public static void init(final File workingDirectory) {
     init(workingDirectory, new File(System.getProperty("user.dir")));
   }
 
-  public static void init(File workingDirectory, File appDirectory) {
+  public static void init(final File workingDirectory, final File appDirectory) {
 
     if (!isInitialized) {
       synchronized (Log4jUtils.class) {
@@ -102,7 +102,7 @@ public final class Log4jUtils {
           // load loggers from config folder
 
           String[] loggers = new File(appDirectory, "config/log4j/loggers/").list(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
+            public boolean accept(final File dir, final String name) {
               return name.endsWith(".properties");
             }
           });
@@ -160,7 +160,7 @@ public final class Log4jUtils {
    *          <code>true</code> if an error must be logged when something goes
    *          wrong, like file missing for example
    */
-  private static void updatePropertiesFromURL(Properties properties, URL url, boolean logError) {
+  private static void updatePropertiesFromURL(final Properties properties, final URL url, final boolean logError) {
 
     LogLog.debug("Reading configuration file [" + url + "].");
 
@@ -223,7 +223,7 @@ public final class Log4jUtils {
    *          <code>true</code> if an error must be logged when something goes
    *          wrong, like file missing for example
    */
-  private static void updatePropertiesFromFile(Properties properties, String file, boolean logError) {
+  private static void updatePropertiesFromFile(final Properties properties, final String file, final boolean logError) {
 
     URL url;
 
