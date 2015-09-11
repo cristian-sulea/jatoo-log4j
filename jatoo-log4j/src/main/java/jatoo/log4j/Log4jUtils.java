@@ -39,7 +39,7 @@ import org.apache.log4j.helpers.LogLog;
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
  * @version 4.3, June 26, 2014
  */
-public class Log4jUtils {
+public final class Log4jUtils {
 
   public static final String SYSTEM_PROPERTY_LOGS_DIRECTORY = "logs.directory";
 
