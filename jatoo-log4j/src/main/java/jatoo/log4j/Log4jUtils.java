@@ -45,6 +45,8 @@ public class Log4jUtils {
 
   private static boolean isInitialized = false;
 
+  private Log4jUtils() {}
+
   public static void init() {
     init(new File(System.getProperty("user.dir")));
   }
