@@ -10,9 +10,8 @@
 
 	<body>
 
-		<menu name="Main">
+		<menu name="${project.name}">
 			<item name="Overview" href="index.html" />
-			<item name="Change Log" href="changelog.html" />
 		</menu>
 
 		<menu name="GitHub">
