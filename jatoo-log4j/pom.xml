@@ -11,7 +11,7 @@
 
 
 	<artifactId>jatoo-log4j</artifactId>
-	<version>4.1-SNAPSHOT</version>
+	<version>4.1</version>
 
 
 	<name>JaToo Log4j</name>
