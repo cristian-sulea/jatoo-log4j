@@ -41,10 +41,15 @@ import org.apache.log4j.helpers.LogLog;
  */
 public final class Log4jUtils {
 
+  /** The logs folder parameter used in configuration files. */
   public static final String SYSTEM_PROPERTY_LOGS_FOLDER = "logs.folder";
 
+  /** Be sure that the init/destroy methods are executed only once. */
   private static boolean isInitialized = false;
 
+  /**
+   * Utility classes should not have a public or default constructor.
+   */
   private Log4jUtils() {}
 
   /**
@@ -70,8 +75,6 @@ public final class Log4jUtils {
    * Initializes Log4J with the <code>logs</code> folder created in the
    * specified folder, trying to search for new properties or loggers in the
    * second specified folder.
-   * 
-   * 
    * 
    * @param logsFolder
    *          the parent folder of the <code>logs</code> folder
@@ -150,12 +153,19 @@ public final class Log4jUtils {
     }
   }
 
+  /**
+   * @return <code>true</code> if the <code>Log4J</code> is initialized;
+   *         <code>false</code> otherwise
+   */
   public static boolean isInitialized() {
     synchronized (Log4jUtils.class) {
       return isInitialized;
     }
   }
 
+  /**
+   * Release all the resources.
+   */
   public static void destroy() {
 
     if (isInitialized) {
@@ -185,7 +195,7 @@ public final class Log4jUtils {
    */
   private static void updatePropertiesFromURL(final Properties properties, final URL url, final boolean logError) {
 
-    LogLog.debug("Reading configuration file [" + url + "].");
+    LogLog.debug("Reading configuration file... [" + url + "]");
 
     //
     // read properties from provided URL
@@ -212,18 +222,36 @@ public final class Log4jUtils {
       }
 
       if (logError) {
-        LogLog.error("Could not read configuration file [" + url + "].", e);
-        LogLog.error("Ignoring configuration file [" + url + "].");
+        LogLog.error("Could not read configuration file... [" + url + "]", e);
+        LogLog.error("Ignoring configuration file... [" + url + "]");
       }
     }
 
     finally {
       if (stream != null) {
+
         try {
           stream.close();
-        } catch (InterruptedIOException ignore) {
+        }
+
+        catch (InterruptedIOException e) {
           Thread.currentThread().interrupt();
-        } catch (IOException | RuntimeException ignore) {}
+          if (logError) {
+            LogLog.error("Hmm... In this case (InterruptedIOException) call also #interrupt() on the current thread! [" + url + "]", e);
+          }
+        }
+
+        catch (IOException e) {
+          if (logError) {
+            LogLog.error("The stream.close() call failed. [" + url + "]", e);
+          }
+        }
+
+        catch (RuntimeException e) {
+          if (logError) {
+            LogLog.error("This is strange... How can i have something else (except an io exception) on a stream.close() call? [" + url + "]", e);
+          }
+        }
       }
     }
 
