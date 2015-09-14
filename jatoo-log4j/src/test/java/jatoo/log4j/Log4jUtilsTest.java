@@ -37,103 +37,103 @@ import org.junit.Test;
  */
 public class Log4jUtilsTest {
 
-	private static final File WORKING_DIRECTORY = new File("target");
-	private static final File APP_DIRECTORY = new File("target");
+  private static final File WORKING_DIRECTORY = new File("target");
+  private static final File APP_DIRECTORY = new File("target");
 
-	private static final File LOGS1_DIRECTORY = new File("logs");
-	private static final File LOGS2_DIRECTORY = new File(WORKING_DIRECTORY, "logs");
+  private static final File LOGS1_DIRECTORY = new File("logs");
+  private static final File LOGS2_DIRECTORY = new File(WORKING_DIRECTORY, "logs");
 
-	@BeforeClass
-	public static void beforeClass() {}
+  @BeforeClass
+  public static void beforeClass() {}
 
-	@AfterClass
-	public static void afterClass() {}
+  @AfterClass
+  public static void afterClass() {}
 
-	@Before
-	public void before() {
-		Assert.assertNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
-	}
+  @Before
+  public void before() {
+    Assert.assertNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
+  }
 
-	@After
-	public void after() throws Exception {
+  @After
+  public void after() throws Exception {
 
-		Log4jUtils.destroy();
+    Log4jUtils.destroy();
 
-		Assert.assertNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
+    Assert.assertNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
 
-		FileUtils.deleteDirectory(LOGS1_DIRECTORY);
-		Assert.assertFalse(LOGS1_DIRECTORY.exists());
+    FileUtils.deleteDirectory(LOGS1_DIRECTORY);
+    Assert.assertFalse(LOGS1_DIRECTORY.exists());
 
-		FileUtils.deleteDirectory(LOGS2_DIRECTORY);
-		Assert.assertFalse(LOGS2_DIRECTORY.exists());
-	}
+    FileUtils.deleteDirectory(LOGS2_DIRECTORY);
+    Assert.assertFalse(LOGS2_DIRECTORY.exists());
+  }
 
-	@Test
-	public void testInit() {
+  @Test
+  public void testInit() {
 
-		Log4jUtils.init();
+    Log4jUtils.init();
 
-		Assert.assertNotNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
-	}
+    Assert.assertNotNull(System.getProperty(Log4jUtils.SYSTEM_PROPERTY_LOGS_FOLDER));
+  }
 
-	@Test
-	public void testInitWithWorkingDirectory() {
+  @Test
+  public void testInitWithWorkingDirectory() {
 
-		Log4jUtils.init(WORKING_DIRECTORY);
+    Log4jUtils.init(WORKING_DIRECTORY);
 
-		Assert.assertEquals(new File(WORKING_DIRECTORY, "logs").getAbsolutePath(), System.getProperty("logs.folder"));
-		Assert.assertTrue(new File(WORKING_DIRECTORY, "logs").exists());
-	}
+    Assert.assertEquals(new File(WORKING_DIRECTORY, "logs").getAbsolutePath(), System.getProperty("logs.folder"));
+    Assert.assertTrue(new File(WORKING_DIRECTORY, "logs").exists());
+  }
 
-	@Test
-	public void testInitWithWorkingDirectoryAndAppDirectory() {
+  @Test
+  public void testInitWithWorkingDirectoryAndAppDirectory() {
 
-		Log4jUtils.init(WORKING_DIRECTORY, APP_DIRECTORY);
+    Log4jUtils.init(WORKING_DIRECTORY, APP_DIRECTORY);
 
-		Assert.assertEquals(new File(WORKING_DIRECTORY, "logs").getAbsolutePath(), System.getProperty("logs.folder"));
-		Assert.assertTrue(new File(WORKING_DIRECTORY, "logs").exists());
-	}
+    Assert.assertEquals(new File(WORKING_DIRECTORY, "logs").getAbsolutePath(), System.getProperty("logs.folder"));
+    Assert.assertTrue(new File(WORKING_DIRECTORY, "logs").exists());
+  }
 
-	@Test
-	public void testOneLogger() {
+  @Test
+  public void testOneLogger() {
 
-		Log4jUtils.init(WORKING_DIRECTORY);
+    Log4jUtils.init(WORKING_DIRECTORY);
 
-		Log logger = LogFactory.getLog(Log4jUtilsTest.class);
+    Log logger = LogFactory.getLog(Log4jUtilsTest.class);
 
-		logger.debug("debug");
-		logger.info("info");
-		logger.warn("warn");
-		logger.error("error");
-		logger.fatal("fatal");
-	}
+    logger.debug("debug");
+    logger.info("info");
+    logger.warn("warn");
+    logger.error("error");
+    logger.fatal("fatal");
+  }
 
-	@Test
-	public void testManyLoggers() {
+  @Test
+  public void testManyLoggers() {
 
-		Log4jUtils.init(WORKING_DIRECTORY);
+    Log4jUtils.init(WORKING_DIRECTORY);
 
-		//
-		// logger 1
+    //
+    // logger 1
 
-		Log logger1 = LogFactory.getLog("logger1");
+    Log logger1 = LogFactory.getLog("logger1");
 
-		logger1.debug("debug");
-		logger1.info("info");
-		logger1.warn("warn");
-		logger1.error("error");
-		logger1.fatal("fatal");
+    logger1.debug("debug");
+    logger1.info("info");
+    logger1.warn("warn");
+    logger1.error("error");
+    logger1.fatal("fatal");
 
-		//
-		// logger 2
+    //
+    // logger 2
 
-		Log logger2 = LogFactory.getLog("logger2");
+    Log logger2 = LogFactory.getLog("logger2");
 
-		logger2.debug("debug");
-		logger2.info("info");
-		logger2.warn("warn");
-		logger2.error("error");
-		logger2.fatal("fatal");
-	}
+    logger2.debug("debug");
+    logger2.info("info");
+    logger2.warn("warn");
+    logger2.error("error");
+    logger2.fatal("fatal");
+  }
 
 }
