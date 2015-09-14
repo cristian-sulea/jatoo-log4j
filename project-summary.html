@@ -3,15 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>JaToo Log4j - A Java Open Source library created to ease the work with Apache Log4j™ logging library.</title>
+    <title>JaToo Log4j - Project Summary</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
       @import url("./css/site.css");
     </style>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-      <meta name="author" content="Cristian Sulea" />
-    <meta name="Date-Creation-yyyymmdd" content="20140916" />
     <meta name="Date-Revision-yyyymmdd" content="20150914" />
     <meta http-equiv="Content-Language" content="en" />
         
@@ -35,7 +33,7 @@
         &gt;
                               <a href="./" title="JaToo Log4j">JaToo Log4j</a>
         &gt;
-    A Java Open Source library created to ease the work with Apache Log4j™ logging library.
+    Project Summary
       </div>
             <div class="xright">        
                     
@@ -53,8 +51,8 @@
                                 <h5>JaToo Log4j</h5>
                   <ul>
                   <li class="none">
-            <strong>Overview</strong>
-          </li>
+                          <a href="index.html" title="Overview">Overview</a>
+            </li>
           </ul>
                        <h5>GitHub</h5>
                   <ul>
@@ -70,9 +68,20 @@
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
-                                                                                                        <li class="collapsed">
+                                                                                                                  <li class="expanded">
                           <a href="project-info.html" title="Project Information">Project Information</a>
-                  </li>
+                    <ul>
+                      <li class="none">
+            <strong>Project Summary</strong>
+          </li>
+                      <li class="none">
+                          <a href="dependencies.html" title="Dependencies">Dependencies</a>
+            </li>
+                      <li class="none">
+                          <a href="license.html" title="Project License">Project License</a>
+            </li>
+              </ul>
+        </li>
                                                                                                                                                                                                   <li class="collapsed">
                           <a href="project-reports.html" title="Project Reports">Project Reports</a>
                   </li>
@@ -87,63 +96,55 @@
     <div id="bodyColumn">
       <div id="contentBox">
         <div class="section">
-<h2>JaToo Log4j<a name="JaToo_Log4j"></a></h2>
-<p>A Java Open Source library created to ease the work with Apache Log4j&#x2122; logging library.</p>
+<h2>Project Summary<a name="Project_Summary"></a></h2><a name="Project_Summary"></a>
 <div class="section">
-<h3>Usage / Examples<a name="Usage__Examples"></a></h3>
-<p>Initializes Log4J with the <tt>logs</tt> folder created in the working directory (where the JVM is started).</p>
-<div class="source">
-<pre>Log4jUtils.init();
-</pre></div>
-<p>Initializes Log4J with the <tt>logs</tt> folder created in the specified folder.</p>
-<div class="source">
-<pre>File logsFolder = new File(&quot;target&quot;);
-
-Log4jUtils.init(logsFolder);
-</pre></div>
-<p>Initializes Log4J with the <tt>logs</tt> folder created in the specified folder, trying to search for new properties or loggers in the second specified folder.</p>
-<div class="source">
-<pre>File logsFolder = new File(&quot;target&quot;);
-File configFolder = new File(&quot;target&quot;);
-
-Log4jUtils.init(logsFolder, configFolder);
-</pre></div>
-<p>A test with one logger.</p>
-<div class="source">
-<pre>Log4jUtils.init();
-
-Log logger = LogFactory.getLog(Log4jUtilsTest.class);
-
-logger.debug(&quot;debug&quot;);
-logger.info(&quot;info&quot;);
-logger.warn(&quot;warn&quot;);
-logger.error(&quot;error&quot;);
-logger.fatal(&quot;fatal&quot;);
-</pre></div>
-<p>A test with many loggers.</p>
-<div class="source">
-<pre>Log4jUtils.init();
-
-Log logger1 = LogFactory.getLog(&quot;logger1&quot;);
-logger1.debug(&quot;debug&quot;);
-logger1.info(&quot;info&quot;);
-logger1.warn(&quot;warn&quot;);
-logger1.error(&quot;error&quot;);
-logger1.fatal(&quot;fatal&quot;);
-
-Log logger2 = LogFactory.getLog(&quot;logger2&quot;);
-logger2.debug(&quot;debug&quot;);
-logger2.info(&quot;info&quot;);
-logger2.warn(&quot;warn&quot;);
-logger2.error(&quot;error&quot;);
-logger2.fatal(&quot;fatal&quot;);
-</pre></div></div>
+<h3>Project Information<a name="Project_Information"></a></h3><a name="Project_Information"></a>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Field</th>
+<th>Value</th></tr>
+<tr class="b">
+<td>Name</td>
+<td>JaToo Log4j</td></tr>
+<tr class="a">
+<td>Description</td>
+<td>A Java Open Source library created to ease the work with Apache Log4j&#x2122; logging library.</td></tr>
+<tr class="b">
+<td>Homepage</td>
+<td><a class="externalLink" href="http://cristian.sulea.net/projects/jatoo-log4j/">http://cristian.sulea.net/projects/jatoo-log4j/</a></td></tr></table></div>
 <div class="section">
-<h3>Licensing<a name="Licensing"></a></h3>
-<p>Copyright (C) Cristian Sulea ( <a class="externalLink" href="http://cristian.sulea.net">http://cristian.sulea.net</a> )</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
-<p>You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <a class="externalLink" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p></div></div>
+<h3>Project Organization<a name="Project_Organization"></a></h3><a name="Project_Organization"></a>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Field</th>
+<th>Value</th></tr>
+<tr class="b">
+<td>Name</td>
+<td>Cristian Sulea</td></tr>
+<tr class="a">
+<td>URL</td>
+<td><a class="externalLink" href="http://cristian.sulea.net">http://cristian.sulea.net</a></td></tr></table></div>
+<div class="section">
+<h3>Build Information<a name="Build_Information"></a></h3><a name="Build_Information"></a>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Field</th>
+<th>Value</th></tr>
+<tr class="b">
+<td>GroupId</td>
+<td>net.sulea.cristian</td></tr>
+<tr class="a">
+<td>ArtifactId</td>
+<td>jatoo-log4j</td></tr>
+<tr class="b">
+<td>Version</td>
+<td>4.1</td></tr>
+<tr class="a">
+<td>Type</td>
+<td>jar</td></tr>
+<tr class="b">
+<td>JDK Rev</td>
+<td>1.7</td></tr></table></div></div>
       </div>
     </div>
     <div class="clear">
