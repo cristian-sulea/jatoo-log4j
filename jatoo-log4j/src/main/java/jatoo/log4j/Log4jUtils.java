@@ -41,34 +41,57 @@ import org.apache.log4j.helpers.LogLog;
  */
 public final class Log4jUtils {
 
-	public static final String SYSTEM_PROPERTY_LOGS_DIRECTORY = "logs.directory";
+	public static final String SYSTEM_PROPERTY_LOGS_FOLDER = "logs.folder";
 
 	private static boolean isInitialized = false;
 
 	private Log4jUtils() {}
 
+	/**
+	 * Initializes Log4J with the <code>logs</code> folder created in the working
+	 * directory (where the JVM is started).
+	 */
 	public static void init() {
 		init(new File(System.getProperty("user.dir")));
 	}
 
-	public static void init(final File workingDirectory) {
-		init(workingDirectory, new File(System.getProperty("user.dir")));
+	/**
+	 * Initializes Log4J with the <code>logs</code> folder created in the
+	 * specified folder.
+	 * 
+	 * @param logsFolder
+	 *          the parent folder of the <code>logs</code> folder
+	 */
+	public static void init(final File logsFolder) {
+		init(logsFolder, new File(System.getProperty("user.dir")));
 	}
 
-	public static void init(final File workingDirectory, final File appDirectory) {
+	/**
+	 * Initializes Log4J with the <code>logs</code> folder created in the
+	 * specified folder, trying to search for new properties or loggers in the
+	 * second specified folder.
+	 * 
+	 * 
+	 * 
+	 * @param logsFolder
+	 *          the parent folder of the <code>logs</code> folder
+	 * @param configFolder
+	 *          the parent folder of the <code>config</code> folder
+	 */
+	public static void init(final File logsFolder, final File configFolder) {
 
 		if (!isInitialized) {
 			synchronized (Log4jUtils.class) {
 				if (!isInitialized) {
 
 					//
-					// ensure logs directory
+					// ensure logs folder
 					// and add him to the system properties
 
-					File logsDirectory = new File(workingDirectory, "logs");
-					logsDirectory.mkdirs();
+					File logsFolderFile = new File(logsFolder, "logs");
+					logsFolderFile.mkdirs();
 
-					System.setProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY, logsDirectory.getAbsolutePath());
+					System.setProperty(SYSTEM_PROPERTY_LOGS_FOLDER, logsFolderFile.getAbsolutePath());
 
 					Properties properties = new Properties();
 
@@ -80,7 +103,7 @@ public final class Log4jUtils {
 					//
 					// configure from config folder
 
-					updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/log4j.properties", false);
+					updatePropertiesFromFile(properties, configFolder.getAbsolutePath() + "/config/log4j/log4j.properties", false);
 
 					//
 					// load loggers from jar
@@ -101,7 +124,7 @@ public final class Log4jUtils {
 					//
 					// load loggers from config folder
 
-					String[] loggers = new File(appDirectory, "config/log4j/loggers/").list(new FilenameFilter() {
+					String[] loggers = new File(configFolder, "config/log4j/loggers/").list(new FilenameFilter() {
 						public boolean accept(final File dir, final String name) {
 							return name.endsWith(".properties");
 						}
@@ -109,7 +132,7 @@ public final class Log4jUtils {
 
 					if (loggers != null && loggers.length > 0) {
 						for (String logger : loggers) {
-							updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/loggers/" + logger, false);
+							updatePropertiesFromFile(properties, configFolder.getAbsolutePath() + "/config/log4j/loggers/" + logger, false);
 						}
 					}
 
@@ -139,7 +162,7 @@ public final class Log4jUtils {
 			synchronized (Log4jUtils.class) {
 				if (isInitialized) {
 
-					System.clearProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY);
+					System.clearProperty(SYSTEM_PROPERTY_LOGS_FOLDER);
 
 					LogManager.shutdown();
 
