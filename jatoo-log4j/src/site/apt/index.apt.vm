@@ -12,6 +12,28 @@ ${project.name}
 	${project.description}
 
 
+* Version 4.1 ( September 14, 2015 )
+
+	* Windows
+		
+		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-windows.zip}jatoo-log4j-4.1-windows.zip}}
+		
+		[]
+	
+	[]
+	
+	* Linux
+		
+		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-linux.tar.bz2}jatoo-log4j-4.1-linux.tar.bz2}}
+		
+		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-linux.tar.gz}jatoo-log4j-4.1-linux.tar.gz}}
+		
+		[]
+	
+	[]
+	
+	Older releases can be obtained from {{{https://github.com/cristian-sulea/jatoo-log4j/releases}the releases page on GitHub}}.
+
 * Usage / Examples
 
 	Initializes Log4J with the <<<logs>>> folder created in the working directory (where the JVM is started).
