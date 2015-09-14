@@ -37,209 +37,209 @@ import org.apache.log4j.helpers.LogLog;
  * library.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 4.3, June 26, 2014
+ * @version 4.4, September 14, 2015
  */
 public final class Log4jUtils {
 
-  public static final String SYSTEM_PROPERTY_LOGS_DIRECTORY = "logs.directory";
+	public static final String SYSTEM_PROPERTY_LOGS_DIRECTORY = "logs.directory";
 
-  private static boolean isInitialized = false;
+	private static boolean isInitialized = false;
 
-  private Log4jUtils() {}
+	private Log4jUtils() {}
 
-  public static void init() {
-    init(new File(System.getProperty("user.dir")));
-  }
+	public static void init() {
+		init(new File(System.getProperty("user.dir")));
+	}
 
-  public static void init(final File workingDirectory) {
-    init(workingDirectory, new File(System.getProperty("user.dir")));
-  }
+	public static void init(final File workingDirectory) {
+		init(workingDirectory, new File(System.getProperty("user.dir")));
+	}
 
-  public static void init(final File workingDirectory, final File appDirectory) {
+	public static void init(final File workingDirectory, final File appDirectory) {
 
-    if (!isInitialized) {
-      synchronized (Log4jUtils.class) {
-        if (!isInitialized) {
+		if (!isInitialized) {
+			synchronized (Log4jUtils.class) {
+				if (!isInitialized) {
 
-          //
-          // ensure logs directory
-          // and add him to the system properties
+					//
+					// ensure logs directory
+					// and add him to the system properties
 
-          File logsDirectory = new File(workingDirectory, "logs");
-          logsDirectory.mkdirs();
+					File logsDirectory = new File(workingDirectory, "logs");
+					logsDirectory.mkdirs();
 
-          System.setProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY, logsDirectory.getAbsolutePath());
+					System.setProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY, logsDirectory.getAbsolutePath());
 
-          Properties properties = new Properties();
+					Properties properties = new Properties();
 
-          //
-          // configure from jar
+					//
+					// configure from jar
 
-          updatePropertiesFromURL(properties, Log4jUtils.class.getClassLoader().getResource("META-INF/log4j/log4j.properties"), true);
+					updatePropertiesFromURL(properties, Log4jUtils.class.getClassLoader().getResource("META-INF/log4j/log4j.properties"), true);
 
-          //
-          // configure from config folder
+					//
+					// configure from config folder
 
-          updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/log4j.properties", false);
+					updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/log4j.properties", false);
 
-          //
-          // load loggers from jar
+					//
+					// load loggers from jar
 
-          try {
+					try {
 
-            Enumeration<URL> loggersEnumeration = Log4jUtils.class.getClassLoader().getResources("META-INF/log4j/loggers.properties");
+						Enumeration<URL> loggersEnumeration = Log4jUtils.class.getClassLoader().getResources("META-INF/log4j/loggers.properties");
 
-            while (loggersEnumeration.hasMoreElements()) {
-              updatePropertiesFromURL(properties, loggersEnumeration.nextElement(), true);
-            }
-          }
+						while (loggersEnumeration.hasMoreElements()) {
+							updatePropertiesFromURL(properties, loggersEnumeration.nextElement(), true);
+						}
+					}
 
-          catch (Exception e) {
-            LogLog.error("Could not load loggers from jar(s) [META-INF/log4j/loggers.properties].", e);
-          }
+					catch (Exception e) {
+						LogLog.error("Could not load loggers from jar(s) [META-INF/log4j/loggers.properties].", e);
+					}
 
-          //
-          // load loggers from config folder
+					//
+					// load loggers from config folder
 
-          String[] loggers = new File(appDirectory, "config/log4j/loggers/").list(new FilenameFilter() {
-            public boolean accept(final File dir, final String name) {
-              return name.endsWith(".properties");
-            }
-          });
+					String[] loggers = new File(appDirectory, "config/log4j/loggers/").list(new FilenameFilter() {
+						public boolean accept(final File dir, final String name) {
+							return name.endsWith(".properties");
+						}
+					});
 
-          if (loggers != null && loggers.length > 0) {
-            for (String logger : loggers) {
-              updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/loggers/" + logger, false);
-            }
-          }
+					if (loggers != null && loggers.length > 0) {
+						for (String logger : loggers) {
+							updatePropertiesFromFile(properties, appDirectory.getAbsolutePath() + "/config/log4j/loggers/" + logger, false);
+						}
+					}
 
-          //
-          // configure
+					//
+					// configure
 
-          PropertyConfigurator.configure(properties);
+					PropertyConfigurator.configure(properties);
 
-          //
-          // done
+					//
+					// done
 
-          isInitialized = true;
-        }
-      }
-    }
-  }
+					isInitialized = true;
+				}
+			}
+		}
+	}
 
-  public static boolean isInitialized() {
-    synchronized (Log4jUtils.class) {
-      return isInitialized;
-    }
-  }
+	public static boolean isInitialized() {
+		synchronized (Log4jUtils.class) {
+			return isInitialized;
+		}
+	}
 
-  public static void destroy() {
+	public static void destroy() {
 
-    if (isInitialized) {
-      synchronized (Log4jUtils.class) {
-        if (isInitialized) {
+		if (isInitialized) {
+			synchronized (Log4jUtils.class) {
+				if (isInitialized) {
 
-          System.clearProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY);
+					System.clearProperty(SYSTEM_PROPERTY_LOGS_DIRECTORY);
 
-          LogManager.shutdown();
+					LogManager.shutdown();
 
-          isInitialized = false;
-        }
-      }
-    }
-  }
+					isInitialized = false;
+				}
+			}
+		}
+	}
 
-  /**
-   * Update the {@link Properties} with values from the specified {@link URL}.
-   * 
-   * @param properties
-   *          the {@link Properties} object to be updated
-   * @param url
-   *          the configuration file with the new values
-   * @param logError
-   *          <code>true</code> if an error must be logged when something goes
-   *          wrong, like file missing for example
-   */
-  private static void updatePropertiesFromURL(final Properties properties, final URL url, final boolean logError) {
+	/**
+	 * Update the {@link Properties} with values from the specified {@link URL}.
+	 * 
+	 * @param properties
+	 *          the {@link Properties} object to be updated
+	 * @param url
+	 *          the configuration file with the new values
+	 * @param logError
+	 *          <code>true</code> if an error must be logged when something goes
+	 *          wrong, like file missing for example
+	 */
+	private static void updatePropertiesFromURL(final Properties properties, final URL url, final boolean logError) {
 
-    LogLog.debug("Reading configuration file [" + url + "].");
+		LogLog.debug("Reading configuration file [" + url + "].");
 
-    //
-    // read properties from provided URL
+		//
+		// read properties from provided URL
 
-    Properties p = new Properties();
+		Properties p = new Properties();
 
-    InputStream stream = null;
-    URLConnection connection = null;
+		InputStream stream = null;
+		URLConnection connection = null;
 
-    try {
+		try {
 
-      connection = url.openConnection();
-      connection.setUseCaches(false);
+			connection = url.openConnection();
+			connection.setUseCaches(false);
 
-      stream = connection.getInputStream();
+			stream = connection.getInputStream();
 
-      p.load(stream);
-    }
+			p.load(stream);
+		}
 
-    catch (Exception e) {
+		catch (Exception e) {
 
-      if (e instanceof InterruptedIOException || e instanceof InterruptedException) {
-        Thread.currentThread().interrupt();
-      }
+			if (e instanceof InterruptedIOException || e instanceof InterruptedException) {
+				Thread.currentThread().interrupt();
+			}
 
-      if (logError) {
-        LogLog.error("Could not read configuration file [" + url + "].", e);
-        LogLog.error("Ignoring configuration file [" + url + "].");
-      }
-    }
+			if (logError) {
+				LogLog.error("Could not read configuration file [" + url + "].", e);
+				LogLog.error("Ignoring configuration file [" + url + "].");
+			}
+		}
 
-    finally {
-      if (stream != null) {
-        try {
-          stream.close();
-        } catch (InterruptedIOException ignore) {
-          Thread.currentThread().interrupt();
-        } catch (IOException | RuntimeException ignore) {}
-      }
-    }
+		finally {
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (InterruptedIOException ignore) {
+					Thread.currentThread().interrupt();
+				} catch (IOException | RuntimeException ignore) {}
+			}
+		}
 
-    //
-    // update properties
+		//
+		// update properties
 
-    for (String key : p.stringPropertyNames()) {
-      properties.setProperty(key, p.getProperty(key));
-    }
-  }
+		for (String key : p.stringPropertyNames()) {
+			properties.setProperty(key, p.getProperty(key));
+		}
+	}
 
-  /**
-   * Update the {@link Properties} with values from the specified file.
-   * 
-   * @param properties
-   *          the {@link Properties} object to be updated
-   * @param file
-   *          the configuration file with the new values
-   * @param logError
-   *          <code>true</code> if an error must be logged when something goes
-   *          wrong, like file missing for example
-   */
-  private static void updatePropertiesFromFile(final Properties properties, final String file, final boolean logError) {
+	/**
+	 * Update the {@link Properties} with values from the specified file.
+	 * 
+	 * @param properties
+	 *          the {@link Properties} object to be updated
+	 * @param file
+	 *          the configuration file with the new values
+	 * @param logError
+	 *          <code>true</code> if an error must be logged when something goes
+	 *          wrong, like file missing for example
+	 */
+	private static void updatePropertiesFromFile(final Properties properties, final String file, final boolean logError) {
 
-    URL url;
+		URL url;
 
-    try {
-      url = new File(file).toURI().toURL();
-    }
+		try {
+			url = new File(file).toURI().toURL();
+		}
 
-    catch (MalformedURLException e) {
+		catch (MalformedURLException e) {
 
-      LogLog.error("Could not convert file to URL [" + file + "].", e);
-      LogLog.error("Ignoring configuration file [" + file + "].");
+			LogLog.error("Could not convert file to URL [" + file + "].", e);
+			LogLog.error("Ignoring configuration file [" + file + "].");
 
-      return;
-    }
+			return;
+		}
 
-    updatePropertiesFromURL(properties, url, logError);
-  }
+		updatePropertiesFromURL(properties, url, logError);
+	}
 
 }
