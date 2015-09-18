@@ -3,36 +3,39 @@
 
 <head>
 
-	<title>JaToo Log4j</title>
+<title>JaToo Log4j - A Java Open Source library created to ease the work with Apache Log4j™ logging library.</title>
 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="description" content="Landing page ( @GitHub ) for personal project JaToo Log4j ( http://cristian.sulea.net/projects/jatoo-log4j/ ).">
+<meta name="keywords" content="Cristian Sulea, JaToo Log4j">
+<meta name="author" content="Cristian Sulea">
 
-	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+<meta http-equiv="refresh" content="20; url=http://cristian.sulea.net/projects/jatoo-log4j/">
 
-	<script type="text/javascript">
+<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 
-		var count = 20;
-		var counter = setInterval(timer, 1000);
+<style type="text/css">
+#loader {
+	z-index: 9999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	background-image: url("images/loader.gif");
+	background-position: center;
+	background-repeat: no-repeat;
+}
 
-		function timer() {
-			if (count == 1 ) {
-				document.getElementById("timer").innerHTML = "redirecting...";
-			} else {
-				document.getElementById("timer").innerHTML = "redirecting in " + count + " seconds...";
-			}
-			count = count - 1;
-			if (count <= 0) {
-				clearInterval(counter);
-				window.location.href = "http://cristian.sulea.net/projects/jatoo-log4j/";
-				return;
-			}
-		}
-	</script>
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity 1s linear;
+}
+</style>
 
 </head>
 
@@ -43,8 +46,8 @@
 		<p>A Java Open Source library created to ease the work with Apache Log4j™ logging library.</p>
 		<p>
 			<a href="http://cristian.sulea.net/projects/jatoo-log4j/" title="Cristian Sulea / Projects / JaToo Log4j">http://cristian.sulea.net/projects/jatoo-log4j/</a>
+			<sub id="timer" style="font-size: x-small;">( redirecting in 20 seconds... )</sub>
 		</p>
-		<span id="timer">&nbsp;</span>
 	</header>
 
 	<footer id="footer">
@@ -62,6 +65,42 @@
 		</ul>
 
 	</footer>
+
+	<div id="loader"></div>
+
+	<script type="text/javascript">
+		var count = 19;
+		var counter = setInterval(timer, 1000);
+
+		function timer() {
+			if (count == 1) {
+				document.getElementById("timer").innerHTML = "redirecting...";
+			} else {
+				document.getElementById("timer").innerHTML = "( redirecting in " + count + " seconds... )";
+			}
+			count = count - 1;
+			if (count <= 0) {
+				clearInterval(counter);
+				window.location.href = "http://cristian.sulea.net/projects/jatoo-log4j/";
+				return;
+			}
+		}
+
+		function loadCSS(href) {
+			var l = document.createElement('link');
+			l.rel = "stylesheet";
+			l.type = "text/css";
+			l.href = href;
+			var h = document.getElementsByTagName('head')[0];
+			h.appendChild(l);
+		}
+	</script>
+
+	<script type="text/javascript">
+		loadCSS("assets/css/main.css");
+	</script>
+	<!--[if lte IE 8]><script>loadCSS("assets/css/ie8.css");</script><![endif]-->
+	<!--[if lte IE 8]><script>loadCSS("assets/css/ie9.css");</script><![endif]-->
 
 	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="assets/js/main.js"></script>
