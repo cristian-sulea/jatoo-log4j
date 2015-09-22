@@ -6,8 +6,8 @@
 	<parent>
 		<groupId>net.sulea.cristian</groupId>
 		<artifactId>jatoo</artifactId>
-		<!-- <relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
-		<version>2.0</version>
+<!-- 		<relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
+		<version>2.1-SNAPSHOT</version>
 	</parent>
 
 
@@ -57,14 +57,20 @@
 	</dependencies>
 
 
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.apache.maven.plugins</groupId> -->
-	<!-- <artifactId>maven-assembly-plugin</artifactId> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>${basedir}/src/assembly/dist.xml</descriptor>
+						<descriptor>${basedir}/src/assembly/dist(+src).xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 
 	<repositories>
