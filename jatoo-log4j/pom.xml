@@ -39,9 +39,9 @@
 
 
 	<scm>
-		<connection>scm:git:git@github.com:cristian-sulea/jatoo.git</connection>
-		<developerConnection>scm:git:git@github.com:cristian-sulea/jatoo.git</developerConnection>
-		<url>git@github.com:cristian-sulea/jatoo.git</url>
+		<connection>scm:git:git@github.com:cristian-sulea/jatoo-log4j.git</connection>
+		<developerConnection>scm:git:git@github.com:cristian-sulea/jatoo-log4j.git</developerConnection>
+		<url>git@github.com:cristian-sulea/jatoo-log4j.git</url>
 	</scm>
 
 	<reporting>
