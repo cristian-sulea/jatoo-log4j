@@ -1,2 +1,2 @@
 language: java
-script: cd jatoo-log4j && mvn clean site && cd target && ls
+script: cd jatoo-log4j && mvn clean package clean site && cd target && ls
