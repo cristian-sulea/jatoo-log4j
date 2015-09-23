@@ -6,8 +6,8 @@
 	<parent>
 		<groupId>net.sulea.cristian</groupId>
 		<artifactId>jatoo</artifactId>
-<!-- 		<relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
-		<version>2.1-SNAPSHOT</version>
+		<!-- <relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
+		<version>2.1</version>
 	</parent>
 
 
@@ -75,8 +75,8 @@
 
 	<repositories>
 		<repository>
-			<id>cristian-sulea.github.io</id>
-			<url>http://cristian-sulea.github.io/maven/</url>
+			<id>cristian.sulea.net</id>
+			<url>http://cristian.sulea.net/maven/</url>
 		</repository>
 	</repositories>
 
