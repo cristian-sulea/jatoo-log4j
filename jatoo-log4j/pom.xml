@@ -38,6 +38,35 @@
 	</developers>
 
 
+	<scm>
+		<connection>scm:git:git@github.com:cristian-sulea/jatoo.git</connection>
+		<developerConnection>scm:git:git@github.com:cristian-sulea/jatoo.git</developerConnection>
+		<url>git@github.com:cristian-sulea/jatoo.git</url>
+	</scm>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<version>2.2</version>
+				<reportSets>
+					<reportSet>
+						<configuration>
+							<type>range</type>
+							<range>999</range>
+						</configuration>
+						<reports>
+							<report>changelog</report>
+							<report>file-activity</report>
+							<report>dev-activity</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
 	<dependencies>
 
 		<dependency>
