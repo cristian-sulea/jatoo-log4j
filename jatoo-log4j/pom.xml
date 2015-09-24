@@ -3,16 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 
-	<parent>
-		<groupId>net.sulea.cristian</groupId>
-		<artifactId>jatoo</artifactId>
-		<!-- <relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
-		<version>2.1</version>
-	</parent>
-
-
+	<groupId>net.sulea.cristian</groupId>
 	<artifactId>jatoo-log4j</artifactId>
-	<version>4.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+
+	<version>4.2</version>
 
 
 	<name>JaToo Log4j</name>
@@ -38,48 +34,67 @@
 	</developers>
 
 
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License, Version 3</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+
 	<scm>
 		<connection>scm:git:git@github.com:cristian-sulea/jatoo-log4j.git</connection>
 		<developerConnection>scm:git:git@github.com:cristian-sulea/jatoo-log4j.git</developerConnection>
-		<url>git@github.com:cristian-sulea/jatoo-log4j.git</url>
+		<url>https://github.com/cristian-sulea/jatoo-log4j</url>
 	</scm>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.2</version>
-				<reportSets>
-					<reportSet>
-						<configuration>
-							<type>range</type>
-							<range>999</range>
-						</configuration>
-						<reports>
-							<report>changelog</report>
-							<report>file-activity</report>
-							<report>dev-activity</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
 
 	<dependencies>
 
 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 
 		<!-- test -->
 
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -87,46 +102,87 @@
 
 
 	<build>
+
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
-					<skipAssembly>true</skipAssembly>
-					<descriptors>
-						<descriptor>${basedir}/src/assembly/dist.xml</descriptor>
-						<descriptor>${basedir}/src/assembly/dist(+src).xml</descriptor>
-					</descriptors>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>Cristian Sulea ( http://cristian.sulea.net )</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>Cristian Sulea ( http://cristian.sulea.net )</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+							<goal>test-jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
+
 	</build>
-
-
-	<profiles>
-		<profile>
-			<id>dist</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<configuration>
-							<skipAssembly>false</skipAssembly>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
-
-	<repositories>
-		<repository>
-			<id>cristian.sulea.net</id>
-			<url>http://cristian.sulea.net/maven/</url>
-		</repository>
-	</repositories>
 
 
 </project>
