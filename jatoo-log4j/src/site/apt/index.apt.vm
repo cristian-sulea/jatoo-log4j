@@ -12,27 +12,39 @@ ${project.name}
 	${project.description}
 
 
-* Version 4.1 ( September 14, 2015 )
+* Version ${project.version} ( September 24, 2015 )
 
-	* Windows
+	Binaries
 		
-		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-windows.zip}jatoo-log4j-4.1-windows.zip}}
+		* {{{https://github.com/cristian-sulea/${project.artifactId}/releases/download/v.${project.version}/${project.artifactId}-${project.version}-bin.zip}${project.artifactId}-${project.version}-bin.zip}}
 		
-		[]
-	
-	[]
-	
-	* Linux
 		
-		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-linux.tar.bz2}jatoo-log4j-4.1-linux.tar.bz2}}
-		
-		* {{{https://github.com/cristian-sulea/jatoo-log4j/releases/download/v.4.1/jatoo-log4j-4.1-linux.tar.gz}jatoo-log4j-4.1-linux.tar.gz}}
+		* {{{https://github.com/cristian-sulea/${project.artifactId}/releases/download/v.${project.version}/${project.artifactId}-${project.version}-bin.tar.gz}${project.artifactId}-${project.version}-bin.tar.gz}}
 		
 		[]
 	
-	[]
+	Sources
+		
+		* {{{https://github.com/cristian-sulea/${project.artifactId}/releases/download/v.${project.version}/${project.artifactId}-${project.version}-src.zip}${project.artifactId}-${project.version}-src.zip}}
+		
+		
+		* {{{https://github.com/cristian-sulea/${project.artifactId}/releases/download/v.${project.version}/${project.artifactId}-${project.version}-src.tar.gz}${project.artifactId}-${project.version}-src.tar.gz}}
+		
+		[]
 	
-	Older releases can be obtained from {{{https://github.com/cristian-sulea/jatoo-log4j/releases}the releases page on GitHub}}.
+	Older releases can be obtained from {{{https://github.com/cristian-sulea/${project.artifactId}/releases}the releases page on GitHub}}.
+
+
+* Maven
+
+---
+<dependency>
+    <groupId>${project.groupId}</groupId>
+    <artifactId>${project.artifactId}</artifactId>
+    <version>${project.version}</version>
+</dependency>
+---
+
 
 * Usage / Examples
 
@@ -40,59 +52,31 @@ ${project.name}
 
 +--
 Log4jUtils.init();
-+--
-
-	Initializes Log4J with the <<<logs>>> folder created in the specified folder.
-
-+--
-File logsFolder = new File("target");
-
-Log4jUtils.init(logsFolder);
-+--
-
-	Initializes Log4J with the <<<logs>>> folder created in the specified folder,
-	trying to search for new properties or loggers in the second specified folder.
-
-+--
-File logsFolder = new File("target");
-File configFolder = new File("target");
-
-Log4jUtils.init(logsFolder, configFolder);
-+--
-
-	A test with one logger.
-
-+--
-Log4jUtils.init();
 
 Log logger = LogFactory.getLog(Log4jUtilsTest.class);
 
 logger.debug("debug");
-logger.info("info");
-logger.warn("warn");
-logger.error("error");
-logger.fatal("fatal");
 +--
 
-	A test with many loggers.
+	Please check {{{./tutorial.html}the tutorial}} for more and detailed examples.
 
-+--
-Log4jUtils.init();
 
-Log logger1 = LogFactory.getLog("logger1");
-logger1.debug("debug");
-logger1.info("info");
-logger1.warn("warn");
-logger1.error("error");
-logger1.fatal("fatal");
+* Contact
+	
+	To contact project administrator visit personal web page:
+		
+		* {{{http://cristian.sulea.net}http://cristian.sulea.net}}
+		
+		[]
+	
+	Or one of the profile pages:
+	
+		* {{{https://github.com/cristian-sulea}@ GitHub}}
+		
+		* {{{http://sourceforge.net/users/cristian-sulea/}@ SourceForge.net}}
+		
+		[]
 
-Log logger2 = LogFactory.getLog("logger2");
-logger2.debug("debug");
-logger2.info("info");
-logger2.warn("warn");
-logger2.error("error");
-logger2.fatal("fatal");
-+--
 
 * Licensing
 	

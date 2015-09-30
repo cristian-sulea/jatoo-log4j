@@ -1,0 +1,78 @@
+	-----
+	${project.description}
+	-----
+	Cristian Sulea
+	-----
+	2015-09-30
+	-----
+
+
+Tutorial
+
+
+* Default initialization
+	
+	Initializes Log4J with the "logs" folder created in the working directory (where the JVM is started).
+
++--
+Log4jUtils.init();
++--
+
+
+* Custom initialization
+	
+	Initializes Log4J with the "logs" folder created in the specified folder.
+
++--
+File logsFolder = new File("target");
+
+Log4jUtils.init(logsFolder);
++--
+
+	Initializes Log4J with the "logs" folder created in the specified folder,
+	trying to search for new properties or loggers in the second specified folder.
+
++--
+File logsFolder = new File("target");
+File configFolder = new File("target");
+
+Log4jUtils.init(logsFolder, configFolder);
++--
+
+
+* Using loggers
+	
+	A test with one logger.
+
++--
+Log4jUtils.init();
+
+Log logger = LogFactory.getLog(Log4jUtilsTest.class);
+
+logger.debug("debug");
+logger.info("info");
+logger.warn("warn");
+logger.error("error");
+logger.fatal("fatal");
++--
+
+	A test with many loggers.
+
++--
+Log4jUtils.init();
+
+Log logger1 = LogFactory.getLog("logger1");
+logger1.debug("debug");
+logger1.info("info");
+logger1.warn("warn");
+logger1.error("error");
+logger1.fatal("fatal");
+
+Log logger2 = LogFactory.getLog("logger2");
+logger2.debug("debug");
+logger2.info("info");
+logger2.warn("warn");
+logger2.error("error");
+logger2.fatal("fatal");
++--
+
