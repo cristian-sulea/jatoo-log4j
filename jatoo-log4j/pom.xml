@@ -6,15 +6,15 @@
 	<parent>
 		<groupId>net.sulea.cristian</groupId>
 		<artifactId>jatoo</artifactId>
-<!-- 		<relativePath>../../jatoo/jatoo/pom.xml</relativePath> -->
-		<version>2.3</version>
+		<relativePath>../../jatoo/jatoo/pom.xml</relativePath>
+		<version>3.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>jatoo-log4j</artifactId>
 	<packaging>jar</packaging>
 
 
-	<version>4.3</version>
+	<version>4.4-SNAPSHOT</version>
 
 
 	<name>JaToo Log4j</name>
