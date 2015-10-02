@@ -14,7 +14,7 @@
 	<packaging>jar</packaging>
 
 
-	<version>4.4-SNAPSHOT</version>
+	<version>4.4</version>
 
 
 	<name>JaToo Log4j</name>
