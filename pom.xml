@@ -6,7 +6,7 @@
     <groupId>net.sulea.cristian</groupId>
     <artifactId>jatoo</artifactId>
     <relativePath>../jatoo/pom.xml</relativePath>
-    <version>4.1.0</version>
+    <version>5.0</version>
   </parent>
 
   <artifactId>jatoo-log4j</artifactId>
